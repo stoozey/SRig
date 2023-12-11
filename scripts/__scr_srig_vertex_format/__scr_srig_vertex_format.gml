@@ -1,5 +1,13 @@
 function __srig_class_vertex_format() constructor
 {
+    static destroy = function()
+    {
+        ds_list_destroy(__values);
+        
+        if (__vertexFormat != -1)
+            vertex_format_delete(__vertexFormat);
+    }
+    
     static add_colour = function()
     {
         var _value = new __srig_class_vertex_format_value(__SRIG_VERTEX_FORMAT_TYPE.COLOUR);
@@ -42,21 +50,38 @@ function __srig_class_vertex_format() constructor
         return self;
     }
     
+    static generate = function()
+    {
+        if (__vertexFormat != -1)
+            vertex_format_delete(__vertexFormat);
+        
+        vertex_format_begin();
+            var i = 0;
+            repeat (ds_list_size(__values))
+            {
+                var _value = __values[| i++];
+                _value.add();
+            }
+        __vertexFormat = vertex_format_end();
+    }
+    
     static write_to_buffer = function(_buffer)
     {
-        var _totalValues = array_length(__values);
+        var _totalValues = ds_list_size(__values);
         buffer_write(_buffer, buffer_u8, _totalValues);
         
         var i = 0;
         repeat (_totalValues)
-            __values[i++].write_to_buffer(_buffer);
+        {
+            var _value = __values[| i++];
+            _value.write_to_buffer(_buffer);
+        }
     }
     
     static read_from_buffer = function(_buffer)
     {
-        __values = [];
+        ds_list_clear(__values);
         
-        var i = 0;
         var _totalValues = buffer_read(_buffer, buffer_u8);
         repeat (_totalValues)
         {
@@ -67,21 +92,11 @@ function __srig_class_vertex_format() constructor
         }
     }
     
-    static generate = function()
-    {
-        vertex_format_begin();
-        var i = 0;
-        repeat (array_length(__values))
-            __values[i++].add();
-        
-        return vertex_format_end();
-    }
-    
     static __add_value = function(_value)
     {
-        var _index = array_length(__values);
-        __values[_index] = _value;
+        ds_list_add(__values, _value);
     }
     
-    __values = [];
+    __values = ds_list_create();
+    __vertexFormat = -1;
 }
