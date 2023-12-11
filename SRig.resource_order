@@ -1,0 +1,9 @@
+{
+  "FolderOrderSettings": [
+    {"name":"Demo","order":16,"path":"folders/Demo.yy",},
+    {"name":"SRig","order":17,"path":"folders/SRig.yy",},
+  ],
+  "ResourceOrderSettings": [
+    {"name":"obj_srig_demo","order":1,"path":"objects/obj_srig_demo/obj_srig_demo.yy",},
+  ],
+}

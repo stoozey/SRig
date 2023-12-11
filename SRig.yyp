@@ -1,0 +1,40 @@
+{
+  "resourceType": "GMProject",
+  "resourceVersion": "1.7",
+  "name": "SRig",
+  "AudioGroups": [
+    {"resourceType":"GMAudioGroup","resourceVersion":"1.3","name":"audiogroup_default","targets":-1,},
+  ],
+  "configs": {
+    "children": [],
+    "name": "Default",
+  },
+  "defaultScriptType": 1,
+  "Folders": [
+    {"resourceType":"GMFolder","resourceVersion":"1.0","name":"Demo","folderPath":"folders/Demo.yy",},
+    {"resourceType":"GMFolder","resourceVersion":"1.0","name":"SRig","folderPath":"folders/SRig.yy",},
+    {"folderPath":"folders/SRig/Internal.yy","order":0,"resourceVersion":"1.0","name":"Internal","tags":[],"resourceType":"GMFolder",},
+  ],
+  "IncludedFiles": [],
+  "isEcma": false,
+  "LibraryEmitters": [],
+  "MetaData": {
+    "IDEVersion": "2023.11.0.121",
+  },
+  "resources": [
+    {"id":{"name":"obj_srig_demo","path":"objects/obj_srig_demo/obj_srig_demo.yy",},},
+    {"id":{"name":"rm_srig_demo","path":"rooms/rm_srig_demo/rm_srig_demo.yy",},},
+    {"id":{"name":"__scr_srig_macros","path":"scripts/__scr_srig_macros/__scr_srig_macros.yy",},"order":0,},
+    {"id":{"name":"scr_srig_rig","path":"scripts/scr_srig_rig/scr_srig_rig.yy",},"order":1,},
+    {"id":{"name":"__scr_srig_mesh","path":"scripts/__scr_srig_mesh/__scr_srig_mesh.yy",},"order":1,},
+    {"id":{"name":"__scr_srig_vector3","path":"scripts/__scr_srig_vector3/__scr_srig_vector3.yy",},"order":2,},
+    {"id":{"name":"__scr_srig_vertex_format","path":"scripts/__scr_srig_vertex_format/__scr_srig_vertex_format.yy",},"order":3,},
+  ],
+  "RoomOrderNodes": [
+    {"roomId":{"name":"rm_srig_demo","path":"rooms/rm_srig_demo/rm_srig_demo.yy",},},
+  ],
+  "templateType": "game",
+  "TextureGroups": [
+    {"resourceType":"GMTextureGroup","resourceVersion":"1.3","name":"Default","autocrop":true,"border":2,"compressFormat":"bz2","directory":"","groupParent":null,"isScaled":true,"loadType":"default","mipsToGenerate":0,"targets":-1,},
+  ],
+}
