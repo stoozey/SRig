@@ -29,6 +29,7 @@
     {"id":{"name":"__scr_srig_mesh","path":"scripts/__scr_srig_mesh/__scr_srig_mesh.yy",},"order":1,},
     {"id":{"name":"__scr_srig_vector3","path":"scripts/__scr_srig_vector3/__scr_srig_vector3.yy",},"order":2,},
     {"id":{"name":"__scr_srig_vertex_format","path":"scripts/__scr_srig_vertex_format/__scr_srig_vertex_format.yy",},"order":3,},
+    {"id":{"name":"__scr_srig_vertex_format_value","path":"scripts/__scr_srig_vertex_format_value/__scr_srig_vertex_format_value.yy",},"order":4,},
   ],
   "RoomOrderNodes": [
     {"roomId":{"name":"rm_srig_demo","path":"rooms/rm_srig_demo/rm_srig_demo.yy",},},

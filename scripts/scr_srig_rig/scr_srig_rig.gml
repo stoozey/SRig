@@ -1,4 +1,4 @@
 function SRig() constructor
 {
-    __meshes = {}
+    __meshes = [];
 }

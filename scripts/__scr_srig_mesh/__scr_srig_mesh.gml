@@ -69,19 +69,27 @@ function __srig_class_mesh() constructor
         buffer_write(_buffer, buffer_string, __name);
         __originOffset.write_to_buffer(_buffer);
         __scale.write_to_buffer(_buffer);
+        __vertexFormat.write_to_buffer(_buffer);
         
         var _vertexBuffer = buffer_create_from_vertex_buffer(__vertexBuffer, buffer_fixed, 1);
         var _vertexBufferSize = buffer_get_size(_vertexBuffer);
         var _vertexBufferEncoded = buffer_base64_encode(_vertexBuffer, 0, _vertexBufferSize);
         buffer_delete(_vertexBuffer);
         buffer_write(_buffer, buffer_string, _vertexBufferEncoded);
-        
-        format
     }
     
     static from_buffer = function(_buffer, _deleteBuffer = true)
     {
+        __name = buffer_read(_buffer, buffer_string);
+        __originOffset.read_from_buffer(_buffer);
+        __scale.read_from_buffer(_buffer);
+        __vertexFormat.read_from_buffer(_buffer);
         
+        var _vertexBufferEncoded = buffer_read(_buffer, buffer_string);
+        var _vertexBuffer = buffer_base64_decode(_vertexBufferEncoded);
+        var _vertexFormat = __vertexFormat.generate();
+        __vertexBuffer = vertex_create_buffer_from_buffer(_vertexBuffer, _vertexFormat);
+        buffer_delete(_vertexBuffer);
     }
     
     static draw = function(_x, _y, _z, _xRotation, _yRotation, _zRotation, _xScale, _yScale, _zScale, _texture = -1, _primitiveType = pr_trianglelist)
@@ -94,6 +102,6 @@ function __srig_class_mesh() constructor
     __name = "";
     __originOffset = new __srig_class_vector3();
     __scale = new __srig_class_vector3();
+    __vertexFormat = new __srig_class_vertex_format();
     __vertexBuffer = -1;
-    __vertexFormat = -1;
 }
