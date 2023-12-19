@@ -38,12 +38,6 @@ function SRig(_defaultVertexFormat = undefined) constructor
         _mesh.set_name(_name);
         __meshes[$ _name] = _mesh;
     }
-    
-	static add_mesh_from_file = function(_filename, _applyDefaultVertexFormat = true)
-    {
-        var _buffer = buffer_load(_filename);
-        var _mesh = new __srig_class_mesh();
-    }
 	
     static draw_general = function(_x, _y, _z, _xRotation, _yRotation, _zRotation, _xScale, _yScale, _zScale, _primitiveType)
     {
