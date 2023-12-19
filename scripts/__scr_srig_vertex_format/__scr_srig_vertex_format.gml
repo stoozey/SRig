@@ -1,3 +1,9 @@
+global.__srig_default_vertex_format = new __srig_class_vertex_format()
+    .add_colour()
+    .add_normal()
+    .add_position_3d()
+    .add_texcoord();
+
 function __srig_class_vertex_format() constructor
 {
     static destroy = function()

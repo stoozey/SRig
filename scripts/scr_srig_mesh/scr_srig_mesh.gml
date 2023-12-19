@@ -1,4 +1,4 @@
-function __srig_class_mesh() constructor
+function SRigMesh() constructor
 {
     #region setters
     
@@ -111,6 +111,7 @@ function __srig_class_mesh() constructor
         buffer_write(_buffer, buffer_string, __name);
         buffer_write(_buffer, buffer_string, __textureSpriteName);
         __anchorPoint.write_to_buffer(_buffer);
+		build_anchor_matrix();
         __originOffset.write_to_buffer(_buffer);
         __scale.write_to_buffer(_buffer);
         __vertexFormat.write_to_buffer(_buffer);
