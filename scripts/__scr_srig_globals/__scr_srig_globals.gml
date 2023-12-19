@@ -1,0 +1,1 @@
+global.__srig_identity_matrix = matrix_build_identity();

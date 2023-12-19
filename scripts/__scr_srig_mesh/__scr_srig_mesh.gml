@@ -21,6 +21,7 @@ function __srig_class_mesh() constructor
     static set_anchor_point = function(_anchorPoint)
     {
         __anchorPoint = _anchorPoint;
+        build_anchor_matrix();
         return self;
     }
     
@@ -92,6 +93,11 @@ function __srig_class_mesh() constructor
     
     #endregion
     
+    static build_anchor_matrix = function()
+    {
+        __anchorMatrix = matrix_build(__anchorPoint.x, __anchorPoint.y, __anchorPoint.z, 0, 0, 0, 1, 1, 1);
+    }
+    
     static destroy = function()
     {
         __vertexFormat.destroy();
@@ -127,18 +133,21 @@ function __srig_class_mesh() constructor
         
         var _vertexBufferEncoded = buffer_read(_buffer, buffer_string);
         var _vertexBuffer = buffer_base64_decode(_vertexBufferEncoded);
-        var _vertexFormat = __vertexFormat.generate();
+        var _vertexFormat = __vertexFormat.get_vertex_format();
         set_vertex_buffer(vertex_create_buffer_from_buffer(_vertexBuffer, _vertexFormat));
         buffer_delete(_vertexBuffer);
     }
     
     static draw = function(_x, _y, _z, _xRotation, _yRotation, _zRotation, _xScale, _yScale, _zScale, _primitiveType)
     {
-        matrix_set(matrix_world, matrix_build(_x, _y, _z, _xRotation, _yRotation, _zRotation, _xScale, _yScale, _zScale));
-            vertex_submit(__vertexBuffer, _primitiveType, __texture);
-        matrix_set(matrix_world, matrix_build_identity());
+        var _positionMatrix = matrix_build((_x + __originOffset.x), (_y + __originOffset.y), (_z + __originOffset.z), 0, 0, 0, 1, 1 ,1);
+        var _rotationMatrix = matrix_build(0, 0, 0, _xRotation, _yRotation, _zRotation, 1, 1, 1);
+        var _scaleMatrix = matrix_build(0, 0, 0, 0, 0, 0, _xScale, _yScale, _zScale);
+        var _matrix = matrix_multiply(matrix_multiply(matrix_multiply(__anchorMatrix, _positionMatrix), _rotationMatrix), _scaleMatrix);
+        matrix_set(matrix_world, _matrix);
+        vertex_submit(__vertexBuffer, _primitiveType, __texture);
     }
-    
+
     __name = "";
     __textureSpriteName = "";
     __anchorPoint = new __srig_class_vector3();
@@ -148,4 +157,5 @@ function __srig_class_mesh() constructor
     __vertexBuffer = -1;
     
     __texture = -1;
+    __anchorMatrix = global.__srig_identity_matrix;
 }

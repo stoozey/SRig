@@ -50,6 +50,11 @@ function __srig_class_vertex_format() constructor
         return self;
     }
     
+    static get_vertex_format = function()
+    {
+        return __vertexFormat;
+    }
+    
     static generate = function()
     {
         if (__vertexFormat != -1)
