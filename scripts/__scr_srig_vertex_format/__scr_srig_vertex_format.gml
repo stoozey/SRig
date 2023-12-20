@@ -90,6 +90,8 @@ function __srig_class_vertex_format() constructor
             var _value = __values[| i++];
             _value.write_to_buffer(_buffer);
         }
+		
+		return self;
     }
     
     static read_from_buffer = function(_buffer)
@@ -104,6 +106,8 @@ function __srig_class_vertex_format() constructor
                
             __add_value(_value);
         }
+		
+		return self;
     }
     
     static __add_value = function(_value)

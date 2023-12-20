@@ -143,7 +143,7 @@ function SRigMesh() constructor
             vertex_delete_buffer(__vertexBuffer);
     }
     
-    static write_to_buffer = function()
+    static write_to_buffer = function(_buffer)
     {
         buffer_write(_buffer, buffer_string, __name);
         buffer_write(_buffer, buffer_string, __textureSpriteName);
@@ -159,6 +159,8 @@ function SRigMesh() constructor
         var _vertexBufferEncoded = buffer_base64_encode(_vertexBuffer, 0, _vertexBufferSize);
         buffer_delete(_vertexBuffer);
         buffer_write(_buffer, buffer_string, _vertexBufferEncoded);
+		
+		return self;
     }
     
     static read_from_buffer = function(_buffer)
@@ -171,13 +173,17 @@ function SRigMesh() constructor
 		build_anchor_matrices();
         __originOffset.read_from_buffer(_buffer);
         __scale.read_from_buffer(_buffer);
-        __vertexFormat.read_from_buffer(_buffer);
-        
+        __vertexFormat
+			.read_from_buffer(_buffer)
+			.generate();
+		
         var _vertexBufferEncoded = buffer_read(_buffer, buffer_string);
         var _vertexBuffer = buffer_base64_decode(_vertexBufferEncoded);
         var _vertexFormat = __vertexFormat.get_vertex_format();
         set_vertex_buffer(vertex_create_buffer_from_buffer(_vertexBuffer, _vertexFormat));
         buffer_delete(_vertexBuffer);
+		
+		return self;
     }
     
     static draw = function(_x, _y, _z, _xRotation, _yRotation, _zRotation, _xScale, _yScale, _zScale, _primitiveType)

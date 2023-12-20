@@ -1,8 +1,61 @@
 function SRig(_defaultVertexFormat = undefined) constructor
 {
-    static destroy = function()
-    {
-        var i = 0;
+	static to_buffer = function()
+	{
+		var _buffer = buffer_create(1024, buffer_grow, 1);
+		var i = 0;
+        var _names = variable_struct_get_names(__meshes);
+        var _totalNames = array_length(_names);
+		buffer_write(_buffer, buffer_u64, _totalNames);
+		repeat (_totalNames)
+        {
+            var _name = _names[i++];
+            var _mesh = __meshes[$ _name];
+			_mesh.write_to_buffer(_buffer);
+		}
+		
+		return _buffer;
+	}
+	
+	static to_file = function(_filename)
+	{
+		var _buffer = to_buffer();
+		buffer_save(_buffer, _filename);
+		buffer_delete(_buffer);
+		
+		return self;
+	}
+	
+	static from_buffer = function(_buffer, _deleteBuffer = true)
+	{
+		clear_meshes();
+		
+		var i = 0;
+		var _totalNames = buffer_read(_buffer, buffer_u64);
+		repeat (_totalNames)
+		{
+			var _mesh = new SRigMesh()
+				.read_from_buffer(_buffer);
+			add_mesh(_mesh);
+		}
+		
+		if (_deleteBuffer)
+			buffer_delete(_buffer);
+		
+		return self;
+	}
+	
+	static from_file = function(_filename)
+	{
+		var _buffer = buffer_load(_filename);
+		from_buffer(_buffer, true);
+		
+		return self;
+	}
+	
+	static clear_meshes = function()
+	{
+		var i = 0;
         var _names = variable_struct_get_names(__meshes);
         repeat (array_length(_names))
         {
@@ -11,7 +64,13 @@ function SRig(_defaultVertexFormat = undefined) constructor
             _mesh.destroy();
         }
         
-        delete __meshes;
+        __meshes = { };
+	}
+	
+    static destroy = function()
+    {
+        clear_meshes();
+		delete __meshes;
     }
     
 	static get_default_vertex_format = function()
