@@ -1,8 +1,9 @@
 global.__srig_default_vertex_format = new __srig_class_vertex_format()
-    .add_colour()
-    .add_normal()
     .add_position_3d()
-    .add_texcoord();
+	.add_normal()
+	.add_texcoord()
+	.add_colour()
+	.generate();
 
 function __srig_class_vertex_format() constructor
 {
@@ -74,6 +75,8 @@ function __srig_class_vertex_format() constructor
                 _value.add();
             }
         __vertexFormat = vertex_format_end();
+		
+		return self;
     }
     
     static write_to_buffer = function(_buffer)

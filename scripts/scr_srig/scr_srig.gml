@@ -14,6 +14,11 @@ function SRig(_defaultVertexFormat = undefined) constructor
         delete __meshes;
     }
     
+	static get_default_vertex_format = function()
+	{
+		return __defaultVertexFormat;
+	}
+	
     static get_mesh = function(_name)
     {
         return ((variable_struct_exists(__meshes, _name)) ? __meshes[$ _name] : undefined);
@@ -39,7 +44,7 @@ function SRig(_defaultVertexFormat = undefined) constructor
         __meshes[$ _name] = _mesh;
     }
 	
-    static draw_general = function(_x, _y, _z, _xRotation, _yRotation, _zRotation, _xScale, _yScale, _zScale, _primitiveType)
+    static draw = function(_x, _y, _z, _xRotation, _yRotation, _zRotation, _xScale, _yScale, _zScale, _primitiveType)
     {
         var i = 0;
         var _names = variable_struct_get_names(__meshes);
@@ -48,7 +53,7 @@ function SRig(_defaultVertexFormat = undefined) constructor
             var _name = _names[i++];
             var _mesh = __meshes[$ _name];
             _mesh.draw(_x, _y, _z, _xRotation, _yRotation, _zRotation, _xScale, _yScale, _zScale, _primitiveType);
-        }
+		}
         
         matrix_set(matrix_world, global.__srig_identity_matrix);
     }

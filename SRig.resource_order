@@ -1,6 +1,7 @@
 {
   "FolderOrderSettings": [
     {"name":"Demo","order":16,"path":"folders/Demo.yy",},
+    {"name":"Shaders","order":18,"path":"folders/Shaders.yy",},
     {"name":"SRig","order":17,"path":"folders/SRig.yy",},
   ],
   "ResourceOrderSettings": [
@@ -9,6 +10,7 @@
     {"name":"scr_srig_mesh","order":2,"path":"scripts/scr_srig_mesh/scr_srig_mesh.yy",},
     {"name":"__scr_srig_vector3","order":2,"path":"scripts/__scr_srig_vector3/__scr_srig_vector3.yy",},
     {"name":"__scr_srig_vertex_format","order":3,"path":"scripts/__scr_srig_vertex_format/__scr_srig_vertex_format.yy",},
+    {"name":"spr_tx_horse","order":2,"path":"sprites/spr_tx_horse/spr_tx_horse.yy",},
     {"name":"__scr_srig_vertex_format_value","order":4,"path":"scripts/__scr_srig_vertex_format_value/__scr_srig_vertex_format_value.yy",},
     {"name":"__scr_srig_globals","order":5,"path":"scripts/__scr_srig_globals/__scr_srig_globals.yy",},
   ],
