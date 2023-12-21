@@ -7,7 +7,7 @@ enum __SRIG_VERTEX_FORMAT_TYPE {
     CUSTOM
 }
 
-function __srig_class_descriptor(_formatType = -1, _customType = -1, _customUsage = -1) constructor
+function __srig_class_descriptor_value(_formatType = -1, _customType = -1, _customUsage = -1) constructor
 {
     static add = function()
     {
@@ -37,6 +37,8 @@ function __srig_class_descriptor(_formatType = -1, _customType = -1, _customUsag
                 vertex_format_add_custom(__customType, __customUsage);
                 break;
         }
+		
+		return self;
     }
     
     static write_to_buffer = function(_buffer)
@@ -48,6 +50,8 @@ function __srig_class_descriptor(_formatType = -1, _customType = -1, _customUsag
             buffer_write(_buffer, buffer_u8, __customType);
             buffer_write(_buffer, buffer_u8, __customUsage);
         }
+		
+		return self;
     }
     
     static read_from_buffer = function(_buffer)
@@ -59,6 +63,8 @@ function __srig_class_descriptor(_formatType = -1, _customType = -1, _customUsag
             __customType = buffer_read(_buffer, buffer_u8);
             __customUsage = buffer_read(_buffer, buffer_u8);
         }
+		
+		return self;
     }
     
     __formatType = _formatType;

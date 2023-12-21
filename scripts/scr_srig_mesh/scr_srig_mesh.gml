@@ -8,12 +8,13 @@ function SRigMesh() constructor
         return self;
     }
     
-    static set_texture_sprite_name = function(_textureSpriteName)
+    static set_texture_sprite_name = function(_textureSpriteName, _subImg = 0)
     {
         __textureSpriteName = _textureSpriteName;
+		__textureSpriteSubImg = _subImg;
 		
         var _spriteIndex = asset_get_index(__textureSpriteName);
-        __texture = ((_spriteIndex == -1) ? -1 : sprite_get_texture(_spriteIndex, 0));
+        __texture = ((_spriteIndex == -1) ? -1 : sprite_get_texture(_spriteIndex, _subImg));
 		
         return self;
     }
@@ -157,6 +158,7 @@ function SRigMesh() constructor
     {
         buffer_write(_buffer, buffer_string, __name);
         buffer_write(_buffer, buffer_string, __textureSpriteName);
+        buffer_write(_buffer, buffer_u16, __textureSpriteSubImg);
         __anchorPosition.write_to_buffer(_buffer);
         __anchorRotation.write_to_buffer(_buffer);
         __anchorScale.write_to_buffer(_buffer);
@@ -173,25 +175,27 @@ function SRigMesh() constructor
 		return self;
     }
     
-    static read_from_buffer = function(_buffer)
+    static read_from_buffer = function(_inBuffer)
     {
-        set_name(buffer_read(_buffer, buffer_string));
-        set_texture_sprite_name(buffer_read(_buffer, buffer_string));
-        __anchorPosition.read_from_buffer(_buffer);
-        __anchorRotation.read_from_buffer(_buffer);
-        __anchorScale.read_from_buffer(_buffer);
+        set_name(buffer_read(_inBuffer, buffer_string));
+        set_texture_sprite_name(buffer_read(_inBuffer, buffer_string), buffer_read(_inBuffer, buffer_u16));
+        __anchorPosition.read_from_buffer(_inBuffer);
+        __anchorRotation.read_from_buffer(_inBuffer);
+        __anchorScale.read_from_buffer(_inBuffer);
 		build_anchor_matrices();
-        __originOffset.read_from_buffer(_buffer);
-        __scale.read_from_buffer(_buffer);
+        __originOffset.read_from_buffer(_inBuffer);
+        __scale.read_from_buffer(_inBuffer);
         __descriptor
-			.read_from_buffer(_buffer)
+			.read_from_buffer(_inBuffer)
 			.generate();
 		
-        var _vertexBufferEncoded = buffer_read(_buffer, buffer_string);
-        var _vertexBuffer = buffer_base64_decode(_vertexBufferEncoded);
+		show_message(json_stringify(self, true));
+        var _bufferEncoded = buffer_read(_inBuffer, buffer_string);
+        var _buffer = buffer_base64_decode(_bufferEncoded);
         var _vertexFormat = __descriptor.get_vertex_format();
-        set_vertex_buffer(vertex_create_buffer_from_buffer(_vertexBuffer, _vertexFormat));
-        buffer_delete(_vertexBuffer);
+		var _vertexBuffer = vertex_create_buffer_from_buffer(_buffer, _vertexFormat);
+        set_vertex_buffer(_vertexBuffer);
+        buffer_delete(_buffer);
 		
 		return self;
     }
@@ -209,12 +213,13 @@ function SRigMesh() constructor
 
     __name = "";
     __textureSpriteName = "";
+	__textureSpriteSubImg = 0;
     __anchorPosition = new __srig_class_vector3();
     __anchorRotation = new __srig_class_vector3();
     __anchorScale = new __srig_class_vector3(1, 1, 1);
     __originOffset = new __srig_class_vector3();
     __scale = new __srig_class_vector3();
-    __descriptor = new SRigDescriptor();
+    __descriptor = global.__srig_default_descriptor;
     __vertexBuffer = -1;
     
     __texture = -1;

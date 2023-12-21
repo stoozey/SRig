@@ -11,7 +11,7 @@ rig = new SRig().from_file("horse.srig");
 
 
 
-//vertexFormat = new __srig_class_vertex_format()
+//vertexFormat = new SRigDescriptor()
 //		.add_position_3d()
 //	    .add_normal()
 //	    .add_texcoord()
@@ -24,7 +24,7 @@ rig = new SRig().from_file("horse.srig");
 //var _vbuffFileToSRigMesh = function(_filename, _name)
 //{
 //	var _buffer = buffer_load(_filename);
-//	var _vertexBuffer = vertex_create_buffer_from_buffer(_buffer, vertexFormat.get_descriptor());
+//	var _vertexBuffer = vertex_create_buffer_from_buffer(_buffer, vertexFormat.get_vertex_format());
 //	buffer_delete(_buffer);
 	
 //	var _mesh = new SRigMesh()

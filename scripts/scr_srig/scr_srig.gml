@@ -30,7 +30,6 @@ function SRig(_defaultDescriptor = undefined) constructor
 	{
 		clear_meshes();
 		
-		var i = 0;
 		var _totalNames = buffer_read(_buffer, buffer_u64);
 		repeat (_totalNames)
 		{
@@ -101,6 +100,7 @@ function SRig(_defaultDescriptor = undefined) constructor
 		
         _mesh.set_name(_name);
         __meshes[$ _name] = _mesh;
+		return self;
     }
 	
     static draw = function(_x, _y, _z, _xRotation, _yRotation, _zRotation, _xScale, _yScale, _zScale, _primitiveType)
