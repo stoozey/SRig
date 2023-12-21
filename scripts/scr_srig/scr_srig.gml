@@ -1,4 +1,4 @@
-function SRig(_defaultVertexFormat = undefined) constructor
+function SRig(_defaultDescriptor = undefined) constructor
 {
 	static to_buffer = function()
 	{
@@ -73,9 +73,9 @@ function SRig(_defaultVertexFormat = undefined) constructor
 		delete __meshes;
     }
     
-	static get_default_vertex_format = function()
+	static get_default_descriptor = function()
 	{
-		return __defaultVertexFormat;
+		return __defaultDescriptor;
 	}
 	
     static get_mesh = function(_name)
@@ -88,7 +88,7 @@ function SRig(_defaultVertexFormat = undefined) constructor
         return (get_mesh(_name) != undefined);
     }
     
-    static add_mesh = function(_mesh, _applyDefaultVertexFormat = true)
+    static add_mesh = function(_mesh, _applyDefaultDescriptor = true)
     {
         var _duplicateIndex = 0;
         var _originalName = _mesh.get_name();
@@ -96,8 +96,8 @@ function SRig(_defaultVertexFormat = undefined) constructor
         while (mesh_exists(_name))
             _name = (_originalName + "_" + string(_duplicateIndex++));
         
-		 if (_applyDefaultVertexFormat)
-            _mesh.set_vertex_format(__defaultVertexFormat);
+		 if (_applyDefaultDescriptor)
+            _mesh.set_descriptor(__defaultDescriptor);
 		
         _mesh.set_name(_name);
         __meshes[$ _name] = _mesh;
@@ -117,7 +117,7 @@ function SRig(_defaultVertexFormat = undefined) constructor
         matrix_set(matrix_world, global.__srig_identity_matrix);
     }
     
-	__defaultVertexFormat = (_defaultVertexFormat ?? global.__srig_default_vertex_format);
+	__defaultDescriptor = (_defaultDescriptor ?? global.__srig_default_descriptor);
     
     __originPosition = new __srig_class_vector3();
     __meshes = { };

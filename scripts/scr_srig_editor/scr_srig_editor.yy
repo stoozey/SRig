@@ -1,11 +1,11 @@
 {
   "resourceType": "GMScript",
   "resourceVersion": "1.0",
-  "name": "__scr_srig_vertex_format",
+  "name": "scr_srig_editor",
   "isCompatibility": false,
   "isDnD": false,
   "parent": {
-    "name": "Internal",
-    "path": "folders/SRig/Internal.yy",
+    "name": "Editor",
+    "path": "folders/Editor.yy",
   },
 }

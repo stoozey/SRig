@@ -1,11 +1,11 @@
-global.__srig_default_vertex_format = new __srig_class_vertex_format()
+global.__srig_default_descriptor = new SRigDescriptor()
     .add_position_3d()
 	.add_normal()
 	.add_texcoord()
 	.add_colour()
 	.generate();
 
-function __srig_class_vertex_format() constructor
+function SRigDescriptor() constructor
 {
     static destroy = function()
     {
@@ -17,42 +17,42 @@ function __srig_class_vertex_format() constructor
     
     static add_colour = function()
     {
-        var _value = new __srig_class_vertex_format_value(__SRIG_VERTEX_FORMAT_TYPE.COLOUR);
+        var _value = new __srig_class_descriptor(__SRIG_VERTEX_FORMAT_TYPE.COLOUR);
         __add_value(_value);
         return self;
     }
     
     static add_normal = function()
     {
-        var _value = new __srig_class_vertex_format_value(__SRIG_VERTEX_FORMAT_TYPE.NORMAL);
+        var _value = new __srig_class_descriptor(__SRIG_VERTEX_FORMAT_TYPE.NORMAL);
         __add_value(_value);
         return self;
     }
     
     static add_position = function()
     {
-        var _value = new __srig_class_vertex_format_value(__SRIG_VERTEX_FORMAT_TYPE.POSITION);
+        var _value = new __srig_class_descriptor(__SRIG_VERTEX_FORMAT_TYPE.POSITION);
         __add_value(_value);
         return self;
     }
     
     static add_position_3d = function()
     {
-        var _value = new __srig_class_vertex_format_value(__SRIG_VERTEX_FORMAT_TYPE.POSITION_3D);
+        var _value = new __srig_class_descriptor(__SRIG_VERTEX_FORMAT_TYPE.POSITION_3D);
         __add_value(_value);
         return self;
     }
     
     static add_texcoord = function()
     {
-        var _value = new __srig_class_vertex_format_value(__SRIG_VERTEX_FORMAT_TYPE.TEXCOORD);
+        var _value = new __srig_class_descriptor(__SRIG_VERTEX_FORMAT_TYPE.TEXCOORD);
         __add_value(_value);
         return self;
     }
     
     static add_custom = function(_customType, _customUsage)
     {
-        var _value = new __srig_class_vertex_format_value(__SRIG_VERTEX_FORMAT_TYPE.CUSTOM, _customType, _customUsage);
+        var _value = new __srig_class_descriptor(__SRIG_VERTEX_FORMAT_TYPE.CUSTOM, _customType, _customUsage);
         __add_value(_value);
         return self;
     }
@@ -101,7 +101,7 @@ function __srig_class_vertex_format() constructor
         var _totalValues = buffer_read(_buffer, buffer_u8);
         repeat (_totalValues)
         {
-            var _value = new __srig_class_vertex_format_value();
+            var _value = new __srig_class_descriptor();
             _value.read_from_buffer(_buffer);
                
             __add_value(_value);

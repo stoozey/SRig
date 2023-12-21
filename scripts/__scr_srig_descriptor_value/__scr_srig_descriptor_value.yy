@@ -1,7 +1,7 @@
 {
   "resourceType": "GMScript",
   "resourceVersion": "1.0",
-  "name": "__scr_srig_vertex_format_value",
+  "name": "__scr_srig_descriptor_value",
   "isCompatibility": false,
   "isDnD": false,
   "parent": {

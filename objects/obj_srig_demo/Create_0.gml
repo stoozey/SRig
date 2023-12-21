@@ -24,7 +24,7 @@ rig = new SRig().from_file("horse.srig");
 //var _vbuffFileToSRigMesh = function(_filename, _name)
 //{
 //	var _buffer = buffer_load(_filename);
-//	var _vertexBuffer = vertex_create_buffer_from_buffer(_buffer, vertexFormat.get_vertex_format());
+//	var _vertexBuffer = vertex_create_buffer_from_buffer(_buffer, vertexFormat.get_descriptor());
 //	buffer_delete(_buffer);
 	
 //	var _mesh = new SRigMesh()

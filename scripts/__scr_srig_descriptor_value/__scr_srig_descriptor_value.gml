@@ -7,7 +7,7 @@ enum __SRIG_VERTEX_FORMAT_TYPE {
     CUSTOM
 }
 
-function __srig_class_vertex_format_value(_formatType = -1, _customType = -1, _customUsage = -1) constructor
+function __srig_class_descriptor(_formatType = -1, _customType = -1, _customUsage = -1) constructor
 {
     static add = function()
     {

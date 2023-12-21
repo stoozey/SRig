@@ -70,9 +70,18 @@ function SRigMesh() constructor
         return self;
     }
     
-    static set_vertex_format = function(_vertexFormat)
+	static set_vertex_buffer_from_file = function(_filename)
+	{
+		var _buffer = buffer_load(_filename);
+		var _vertexBuffer = vertex_create_buffer_from_buffer(_buffer, __descriptor.get_vertex_format());
+		buffer_delete(_buffer);
+		set_vertex_buffer(_vertexBuffer);
+		return self;
+	}
+	
+    static set_descriptor = function(_descriptor)
     {
-        __vertexFormat = _vertexFormat;
+        __descriptor = _descriptor;
         return self;
     }
     
@@ -120,13 +129,14 @@ function SRigMesh() constructor
         return __vertexBuffer;
     }
     
-    static get_vertex_format = function()
+    static get_descriptor = function()
     {
-        return __vertexFormat;
+        return __descriptor;
     }
     
     #endregion
     
+	
     static build_anchor_matrices = function()
     {
         var _anchorPositionMatrix = matrix_build(__anchorPosition.x, __anchorPosition.y, __anchorPosition.z, 0, 0, 0, 1, 1, 1);
@@ -137,7 +147,7 @@ function SRigMesh() constructor
     
     static destroy = function()
     {
-        __vertexFormat.destroy();
+        __descriptor.destroy();
         
         if (__vertexBuffer != -1)
             vertex_delete_buffer(__vertexBuffer);
@@ -152,7 +162,7 @@ function SRigMesh() constructor
         __anchorScale.write_to_buffer(_buffer);
         __originOffset.write_to_buffer(_buffer);
         __scale.write_to_buffer(_buffer);
-        __vertexFormat.write_to_buffer(_buffer);
+        __descriptor.write_to_buffer(_buffer);
         
         var _vertexBuffer = buffer_create_from_vertex_buffer(__vertexBuffer, buffer_fixed, 1);
         var _vertexBufferSize = buffer_get_size(_vertexBuffer);
@@ -173,13 +183,13 @@ function SRigMesh() constructor
 		build_anchor_matrices();
         __originOffset.read_from_buffer(_buffer);
         __scale.read_from_buffer(_buffer);
-        __vertexFormat
+        __descriptor
 			.read_from_buffer(_buffer)
 			.generate();
 		
         var _vertexBufferEncoded = buffer_read(_buffer, buffer_string);
         var _vertexBuffer = buffer_base64_decode(_vertexBufferEncoded);
-        var _vertexFormat = __vertexFormat.get_vertex_format();
+        var _vertexFormat = __descriptor.get_vertex_format();
         set_vertex_buffer(vertex_create_buffer_from_buffer(_vertexBuffer, _vertexFormat));
         buffer_delete(_vertexBuffer);
 		
@@ -204,7 +214,7 @@ function SRigMesh() constructor
     __anchorScale = new __srig_class_vector3(1, 1, 1);
     __originOffset = new __srig_class_vector3();
     __scale = new __srig_class_vector3();
-    __vertexFormat = new __srig_class_vertex_format();
+    __descriptor = new SRigDescriptor();
     __vertexBuffer = -1;
     
     __texture = -1;
