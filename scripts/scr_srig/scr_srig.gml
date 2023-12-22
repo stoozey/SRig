@@ -117,7 +117,7 @@ function SRig(_defaultDescriptor = undefined) constructor
         matrix_set(matrix_world, global.__srig_identity_matrix);
     }
     
-	__defaultDescriptor = (_defaultDescriptor ?? global.__srig_default_descriptor);
+	__defaultDescriptor = (_defaultDescriptor ?? srig_descriptor_build_default());
     
     __originPosition = new __srig_class_vector3();
     __meshes = { };

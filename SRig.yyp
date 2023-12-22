@@ -12,9 +12,9 @@
   "defaultScriptType": 1,
   "Folders": [
     {"resourceType":"GMFolder","resourceVersion":"1.0","name":"Demo","folderPath":"folders/Demo.yy",},
+    {"resourceType":"GMFolder","resourceVersion":"1.0","name":"Editor","folderPath":"folders/Editor.yy",},
     {"resourceType":"GMFolder","resourceVersion":"1.0","name":"SRig","folderPath":"folders/SRig.yy",},
     {"resourceType":"GMFolder","resourceVersion":"1.0","name":"Internal","folderPath":"folders/SRig/Internal.yy",},
-    {"resourceType":"GMFolder","resourceVersion":"1.0","name":"Editor","folderPath":"folders/Editor.yy",},
   ],
   "IncludedFiles": [
     {"resourceType":"GMIncludedFile","resourceVersion":"1.0","name":"arrow.vbuff","CopyToMask":-1,"filePath":"datafiles/editor/models",},

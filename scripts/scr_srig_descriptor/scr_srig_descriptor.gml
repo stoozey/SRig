@@ -1,9 +1,12 @@
-global.__srig_default_descriptor = new SRigDescriptor()
-    .add_position_3d()
-	.add_normal()
-	.add_texcoord()
-	.add_colour()
-	.generate();
+function srig_descriptor_build_default()
+{
+	return new SRigDescriptor()
+	    .add_position_3d()
+		.add_normal()
+		.add_texcoord()
+		.add_colour()
+		.generate();
+}
 
 function SRigDescriptor() constructor
 {
@@ -103,10 +106,11 @@ function SRigDescriptor() constructor
         {
             var _value = new __srig_class_descriptor_value()
 				.read_from_buffer(_buffer);
-               
+			
             __add_value(_value);
         }
 		
+		generate();
 		return self;
     }
     

@@ -1,8 +1,8 @@
 {
   "FolderOrderSettings": [
     {"name":"Demo","order":16,"path":"folders/Demo.yy",},
-    {"name":"SRig","order":17,"path":"folders/SRig.yy",},
     {"name":"Editor","order":19,"path":"folders/Editor.yy",},
+    {"name":"SRig","order":17,"path":"folders/SRig.yy",},
   ],
   "ResourceOrderSettings": [
     {"name":"spr_srig_editor_pixel","order":4,"path":"sprites/spr_srig_editor_pixel/spr_srig_editor_pixel.yy",},

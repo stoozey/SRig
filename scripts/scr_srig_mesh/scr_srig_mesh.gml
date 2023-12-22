@@ -177,19 +177,20 @@ function SRigMesh() constructor
     
     static read_from_buffer = function(_inBuffer)
     {
-        set_name(buffer_read(_inBuffer, buffer_string));
-        set_texture_sprite_name(buffer_read(_inBuffer, buffer_string), buffer_read(_inBuffer, buffer_u16));
+		var _name = buffer_read(_inBuffer, buffer_string);
+        set_name(_name);
+		var _textureSpriteName = buffer_read(_inBuffer, buffer_string);
+		var _textureSpriteSubImg = buffer_read(_inBuffer, buffer_u16);
+        set_texture_sprite_name(_textureSpriteName, _textureSpriteSubImg);
         __anchorPosition.read_from_buffer(_inBuffer);
         __anchorRotation.read_from_buffer(_inBuffer);
         __anchorScale.read_from_buffer(_inBuffer);
 		build_anchor_matrices();
         __originOffset.read_from_buffer(_inBuffer);
         __scale.read_from_buffer(_inBuffer);
-        __descriptor
-			.read_from_buffer(_inBuffer)
-			.generate();
+        __descriptor.read_from_buffer(_inBuffer);
 		
-		show_message(json_stringify(self, true));
+		//show_message(json_stringify(self, true));
         var _bufferEncoded = buffer_read(_inBuffer, buffer_string);
         var _buffer = buffer_base64_decode(_bufferEncoded);
         var _vertexFormat = __descriptor.get_vertex_format();
@@ -219,7 +220,7 @@ function SRigMesh() constructor
     __anchorScale = new __srig_class_vector3(1, 1, 1);
     __originOffset = new __srig_class_vector3();
     __scale = new __srig_class_vector3();
-    __descriptor = global.__srig_default_descriptor;
+    __descriptor = srig_descriptor_build_default();
     __vertexBuffer = -1;
     
     __texture = -1;
